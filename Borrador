@@ -1,3 +1,21 @@
-Grupo
+parte 1 Mesa y mesero
 
-edit de kevinPe
+
+int = Cantidad_Mesa
+int = Numero_Mesa
+int = Cantidad_Sillas
+bool = estado
+bool = Vista_Al_Mar
+
+
+Public class Mesero
+int = id_Mesero
+string = Nombre_Completo
+int = Mesas_Asignadas
+String = Turno "Manana, Tarde, Noche"
+double = propinas
+double = rating 
+
+parte 2 Ordenes 
+
+
