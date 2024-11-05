@@ -1,0 +1,22 @@
+Algoritmo del menú
+import javax.swing.JOptionPane; //Aqui importamos la biblioteca a usar de interfaz grafica
+
+private static double totalCuenta = 0; // Fijamos el Contador para el total      
+  
+int opcion; // int para asegurarse de solo usar números enteros en las opciones del menú
+
+String menu = "*Menú*\n" // La interfaz/opciones del menú a trabajar
+
+String input = JOptionPane.showInputDialog(menu); // la llamada de la función menú para presentar las opciones al usuario, esto se logra con JOptionPane y switch / while para los loops y opciones.    
+
+String menuComidas = "*Menú*\n" // esto enseñara los productos en venta con su precio con ayuda del JOptionPane
+        
+String menuPedido = "Seleccione lo que quiere pedir:\n" // este string servirá para dar la opción de selección de compra al cliente de nuevo con JOptionPane   
+     
+int producto = Integer.parseInt(inputProducto);  // un int para evitar la introducción de números reales.  
+   
+totalCuenta += precio; // acumulador que tendrá en memoria lo pedido por el cliente para la cuenta final .
+
+ JOptionPane.showMessageDialog(null, "Opción no valida, por favor intenta de nuevo."); // mensaje de error a añadir para opciones no validas
+
+JOptionPane.showMessageDialog(null, "El total a pagar es: ₡" + totalCuenta); // mensaje que enseñará el total a pagar
