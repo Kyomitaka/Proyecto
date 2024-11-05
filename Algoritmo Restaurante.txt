@@ -1,0 +1,103 @@
+Main
+Restaurante restaurante = new Restaurante(); //Asignamos la clase Restaurante en el objeto restaurante 
+restaurante.EstadoMesas(); // Mostramos el numero de la mesa, la cantidad de sillas, el estado de la mesa, si cuenta con vista al mar o no y la información del mesero asignado
+
+
+Inicio Clase Mesa
+    Atributos:  //Indicamos las variables a utilizar 
+        Private int Numero_Mesa;
+        Private  int Cantidad _Sillas:;
+        Private booleano estado;
+        Private booleano  Vista_Al_Mar;
+        Private Mesero meseroAsignado;
+
+    Método Constructor (Numero_Mesa) “Tipo entero”
+        Asignar  Numero_Mesa = Numero_Mesa;  //asignamos el numero de mesa
+        cantidadSillas =generar_Cantidad_Sillas() //asignamos CantidadSillas en la función generar Cantidad sillas
+        estado = FALSO  //Iniciamos el estado de la mesa en desocupado
+        Vista_Al_Mar = generar_Vista_Al_Mar() //asignamos vista al mar en la función generar Vista al mar
+
+
+    Método generar_Cantidad_Sillas()  “Tipo entero”
+        Retornar un número aleatorio entre 2 y 6 //Esto para generar la cantidad de sillas de forma aleatoria 
+
+    Método generar_Vista_Al_Mar() “Tipo booleano”
+        Si un número aleatorio entre 0 y 100 < 25 entonces
+            Retornar VERDADERO //Esto quiere decir que la mesa si cuenta con vista al mar
+        Sino
+            Retornar FALSO // Caso contrario la mesa no cuenta con vista al mar
+
+    Métodos Getters y Setters:
+        getNumero_Mesa() “Tipo entero”
+        getCantidad_Sillas() “Tipo entero”
+        getEstado() “Tipo booleano”
+        getVistaAlMar() “Tipo booleano”
+        setMeseroAsignado(mesero: Mesero)
+Fin Clase Mesa
+
+
+Inicio Clase Mesero
+    Atributos: //Indicamos las variables a utilizar
+      Private int id_Mesero;
+      Private String nombre_Completo;
+      Private  String turno;
+      Private double propinas;
+      Private double rating; 
+    
+   
+
+ Método Constructor(nombre,apellido) “Tipo texto”
+        Id_Mesero = generarIDMesero();  //asignamos idMesero en la función generar Cantidad_ID_Mesero
+        Nombre_Completo= nombre + " " + apellido; //asignamos tanto el nombre y el apellido
+      turno = asignarTurno_Aleatorio(); //asignamos turno en la función generar Turno_Aleatorio
+        propinas = 0; //Inicializamos propinas en cero ya que aun no ha recibido ninguna propina
+        rating = 5 // //Inicializamos rating en cinco ya que aún no ha recibido ninguna calificación 
+
+
+    Método generar_ID_Mesero()  “Tipo entero”
+        Retornar un número aleatorio entre 1000 y 9999  //Esto para generar una id de cuatro dígitos de forma aleatoria
+
+    Método asignar_Turno_Aleatorio()  “Tipo texto”
+        Elegir aleatoriamente entre "mañana", "tarde", "noche" 
+        Retornar el turno elegido
+
+    Métodos Getters:
+        getNombre_Completo()  “Tipo texto”
+Fin Clase Mesero
+
+Inicio Clase Restaurante
+    Atributos:
+        Private mesas = arreglo de Mesa[] // Definir el arreglo de mesas
+        Private meseros = arreglo de Mesero[4] // Definidos 4 meseros fijos
+
+    Método Constructor()
+        Cantidad_Mesas = new Mesa[generarCantidad_Mesas()] // Genera un arreglo de                                                     mesas
+        meseros = generar_Meseros() //asignamos meseros en la función generar Meseros
+        asignarMeseros_A_Mesas()
+
+    Método generarCantidad_Mesas()  “Tipo entero”
+        Retornar un número aleatorio entre 8 y 12  //Esto para generar la cantidad de mesas entre 8 y 12
+
+    Método generar_Meseros()  “arreglo de Mesero”
+    Inicializar meseros con un arreglo de Mesero[4]
+        for (int i = 0; i < meseros.length; i++);
+            nombre = Elegir aleatoriamente de ["Juan", "María", "Luis", "Ana"]
+            apellido = Elegir aleatoriamente de ["Pérez", "Gómez", "López", "Martínez"]
+            meseros[i] = nuevo Mesero(nombre, apellido)
+        Retornar meseros
+
+    Método asignarMeseros_A_Mesas
+for (int i = 0; i < mesas.length; i++);
+            mesas[i] ← new Mesa(i + 1) // Crear una nueva mesa
+            mesas[i].setMeseroAsignado(meseros[i % longitud(meseros)])  //Con esto asignamos al mesero en la mesa correspondiente
+
+
+
+    Método Estado_Mesas()
+        Por ultimo mostramos toda la información 
+            Imprimir "Mesa #" + mesa.getNumero_Mesa() + // Numero de mesa
+                     ", Sillas: " + mesa.getCantidad_Sillas() + // Cantidad de sillas
+                     ", Estado: " + (mesa.getEstado() ? "Ocupado" : "Desocupado") + // Estado de  la mesa
+                     ", Vista al Mar: " + mesa.getVista_Al_Mar() + // Si tiene vista al mar o no
+                     ", Mesero Asignado: " + mesa.getMeseroAsignado().getNombreCompleto() //Mesa donde esta asignado el mesero y el nombre 
+Fin Clase Restaurante
