@@ -1,0 +1,57 @@
+public class algoritmo {
+    /** Atributos */
+    /** De platillo mas vendido */
+    String nombre;
+    String descripcion;
+    double precio;
+    int Cantidad_Vendida;
+
+    /** De mejor mesero en ventas */
+    String Mejor_Mesero;
+    int max_ventas = 0;
+
+    /** De mejor mesero en ranting */
+    private double rating; 
+
+    /** De datos de meseros */
+    private int idMesero; 
+    private String nombreCompleto; 
+    private String turno; 
+    private double propinas; 
+
+    /** De de las ordenes */
+    private int idMesero;
+    private int numeroMesa;
+    private String orden;
+    private int fecha;
+
+    /** De ventas totales */
+    private int idMesero;
+    private int numeroMesa;
+    private String orden;
+    private int fecha;
+    private int total;
+
+    /** De ventas totales por platillos */
+    private String nombre;
+    private int cantidad;
+    private double precio_individual;
+    private int fecha;
+
+    /** De ventas por tipos de mesa*/
+    private int numeroMesa
+    private double totalVentas;
+    private int fecha;
+    
+    /** Se establecen los metodos*/
+    Método Constructor (PlatilloMasVendido)
+    Método Constructor (MejorMeseroVentas)
+    Método Constructor (MejorMeseroRating)
+    Método Constructor (DatosMesero)
+    Método Constructor (DatosOrdenes)
+    Método Constructor (VentasTotales)
+    Método Constructor (VentasPlatillos)
+    Método Constructor (VentasMesas)
+    
+    Métodos Getters y Setters
+}
