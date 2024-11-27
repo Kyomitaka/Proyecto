@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
@@ -50,9 +46,8 @@ public class Menu {
                             + "Seleccione una opción:";
                 String input = JOptionPane.showInputDialog(menu);
 
-                // Validación de entrada vacía o cancelada
                 if (input == null) {
-                    opcion = 5; // salir si se cancela
+                    opcion = 5; 
                 } else {
                     opcion = Integer.parseInt(input);
                 }
@@ -140,7 +135,7 @@ public class Menu {
     }
 
     String input = JOptionPane.showInputDialog("Ingrese el número del platillo que desea editar:");
-    if (input == null) return; // Cancelar acción
+    if (input == null) return;
 
     try {
         int numero = Integer.parseInt(input);
@@ -186,7 +181,7 @@ public class Menu {
     }
 
     String input = JOptionPane.showInputDialog("Ingrese el número del platillo que desea eliminar:");
-    if (input == null) return; // Cancelar acción
+    if (input == null) return;
 
     try {
         int numero = Integer.parseInt(input);
