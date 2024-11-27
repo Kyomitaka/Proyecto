@@ -15,7 +15,7 @@ public class Mesero {
         this.rating = 5; // Inicializa el rating en 5
     }
 
-    // Métodos Getters y Setters para acceder y modificar los atributos
+    // Metodos Getters y Setters para acceder y modificar los atributos
     public int getIdMesero() {
         return idMesero;
     }
