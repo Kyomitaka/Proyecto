@@ -1,0 +1,262 @@
+ORDENES
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+
+class Orden { CREAMOS LA CLASE DE ORDENES
+ATRIBUTOS:
+    private static int idCounter = 200;
+    private int id;
+    private String nombreCliente;
+    private int numeroMesa;
+    private String mesero;
+    private Date horaOrden;
+    private double iva;
+    private double total;
+    private String estado;
+    private ArrayList<String> detallePlatillos;
+    private int capacidadMaximaPlatillos;
+
+    public Orden(String nombreCliente, int numeroMesa, String mesero, int capacidadMaximaPlatillos) {
+        this.id = idCounter++;
+        this.nombreCliente = nombreCliente;
+        this.numeroMesa = numeroMesa;
+        this.mesero = mesero;
+        this.horaOrden = new Date();
+        this.iva = 0;
+        this.total = 0;
+        this.estado = "abierta";
+        this.detallePlatillos = new ArrayList<>();
+        this.capacidadMaximaPlatillos = capacidadMaximaPlatillos;
+    }
+     public int getId() { 
+        return id;
+    }
+    public int getNumeroMesa() {
+        return numeroMesa;
+    }
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+CREAMOS UN PUBLIC VOID PARA MOSTRAR ORDEN
+    public void mostrarOrden() { 
+        System.out.println("Orden abierta correctamente:");
+        System.out.println("ID Orden: " + id);
+        System.out.println("Nombre del cliente: " + nombreCliente);
+        System.out.println("Número de mesa: " + numeroMesa);
+        System.out.println("Mesero: " + mesero);
+        System.out.println("Hora de la orden: " + horaOrden);
+        System.out.println("IVA: " + iva);
+        System.out.println("Total: " + total);
+        System.out.println("Estado: " + estado);
+        System.out.println("Detalle de platillos: " + detallePlatillos);
+    }
+}
+class Restaurante { USAMOS UNA CLASE RESTAURANTE
+    private ArrayList<Orden> ordenes;
+    private ArrayList<Integer> mesasDisponibles;
+    private ArrayList<Integer> mesasOcupadas;
+    private Scanner scanner;
+
+    public Restaurante() {
+        this.ordenes = new ArrayList<>();
+        this.mesasDisponibles = new ArrayList<>(); // Lista de mesas disponibles
+        this.mesasOcupadas = new ArrayList<>();
+        this.scanner = new Scanner(System.in);
+
+        // Inicializar mesas de ejemplo
+        for (int i = 1; i <= 10; i++) {
+            mesasDisponibles.add(i); // Añadir mesas disponibles (del 1 al 10)
+        }
+    }
+
+    public void abrirOrden() {
+        System.out.print("Ingrese el nombre del cliente: ");
+        String nombreCliente = scanner.nextLine();
+
+        int numeroMesa = solicitarNumeroMesa();
+        if (numeroMesa == -1) return; // Si se cancela, retorna al menú principal
+
+        String mesero = "Mesero asignado"; // Puedes reemplazar con el nombre del mesero asignado
+        int capacidadMaximaPlatillos = obtenerCapacidadMaximaPlatillos(numeroMesa);
+        Orden nuevaOrden = new Orden(nombreCliente, numeroMesa, mesero, capacidadMaximaPlatillos); AQUÍ SE CREA LA ORDEN CON LOS ATRIBUTOS
+        ordenes.add(nuevaOrden);
+        mesasDisponibles.remove(Integer.valueOf(numeroMesa));
+        mesasOcupadas.add(numeroMesa);
+        nuevaOrden.mostrarOrden();
+    }
+    private int solicitarNumeroMesa() { AQUÍ SOLICITAMOS EL NUMERO DE MESA
+        while (true) { 
+            System.out.print("Ingrese el número de la mesa: ");
+            int numeroMesa = scanner.nextInt();
+            scanner.nextLine(); // Limpiar buffer
+
+            if (!mesasDisponibles.contains(numeroMesa)) {
+                if (mesasOcupadas.contains(numeroMesa)) {
+                    System.out.println("El número de la mesa " + numeroMesa + " está ocupada.");
+                } else {
+                    System.out.println("El número de la mesa " + numeroMesa + " no es válido.");
+                }
+                System.out.print("¿Desea [1] Agregar otro número o [2] Cancelar? ");
+                int opcion = scanner.nextInt();
+                scanner.nextLine(); // Limpiar buffer
+                if (opcion == 2) return -1; // Opción cancelar
+            } else {
+                return numeroMesa; // Mesa válida
+            }
+        }
+    }
+    private int obtenerCapacidadMaximaPlatillos(int numeroMesa) {
+        // Ejemplo de cálculo, asume 4 sillas por mesa
+        int cantidadSillas = 4; // Cambiar según la capacidad real de la mesa
+        return cantidadSillas * 3;
+    }
+    public void menuOrdenes() {
+        int opcion;
+        do {
+            System.out.println("Menú de Órdenes:");
+            System.out.println("1- Abrir orden.");
+            System.out.println("2- Agregar platillo a la orden.");
+            System.out.println("3- Cerrar orden.");
+            System.out.println("4- Salir.");
+            System.out.print("Seleccione una opción: ");
+            opcion = scanner.nextInt();
+            scanner.nextLine(); // Limpiar buffer
+            switch (opcion) {
+                case 1:
+                    abrirOrden();
+                    break;
+                case 2:
+                    System.out.println("Funcionalidad en desarrollo.");
+                    break;
+                case 3:
+                    System.out.println("Funcionalidad en desarrollo.");
+                    break;
+                case 4:
+                    System.out.println("Saliendo...");
+                    break;
+                default:
+                    System.out.println("Opción inválida.");
+                    break;
+            }
+        } while (opcion != 4);
+    }
+}
+public class SistemaRestaurante {
+    public static void main(String[] args) {
+        Restaurante restaurante = new Restaurante();
+        restaurante.menuOrdenes();
+    }
+}
+private void mostrarMensajeOk() {
+    System.out.println("No hay mesas disponibles.");
+    System.out.println("Presione [Ok] para volver al menú de órdenes.");
+    scanner.nextLine(); // Espera a que el usuario presione Enter
+}
+public void abrirOrden() {
+    System.out.print("Ingrese el nombre del cliente: ");
+    String nombreCliente = scanner.nextLine();
+    if (mesasDisponibles.isEmpty()) {
+        mostrarMensajeOk();
+        return; // Regresa al menú de órdenes
+    }
+    int numeroMesa = solicitarNumeroMesa();
+    if (numeroMesa == -1) return; // Si se cancela, retorna al menú principal
+
+    String mesero = "Mesero asignado"; // Puedes reemplazar con el nombre del mesero asignado
+    int capacidadMaximaPlatillos = obtenerCapacidadMaximaPlatillos(numeroMesa);
+
+    Orden nuevaOrden = new Orden(nombreCliente, numeroMesa, mesero, capacidadMaximaPlatillos);
+    ordenes.add(nuevaOrden);
+    mesasDisponibles.remove(Integer.valueOf(numeroMesa));
+    mesasOcupadas.add(numeroMesa);
+
+    nuevaOrden.mostrarOrden();
+} 
+AGREGAR PLATILLO A LA ORDEN 
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Orden {
+    int id;
+    String estado = "abierta";
+    ArrayList<DetallePlatillo> platillos = new ArrayList<>();
+    double total = 0, iva = 0;
+    public Orden(int id) { this.id = id; }
+    public void agregarPlatillo(int numeroPlatillo, int cantidad, double precioUnitario) {
+        platillos.add(new DetallePlatillo(numeroPlatillo, cantidad, precioUnitario));
+        total += cantidad * precioUnitario;
+    }
+    public void cerrarOrden(double propina) {
+        estado = "cerrada";
+        iva = total * 0.13;
+        total += propina;
+    }
+}
+
+class DetallePlatillo {
+    int numeroPlatillo, cantidad;
+    double precio;
+
+    public DetallePlatillo(int numeroPlatillo, int cantidad, double precioUnitario) {
+        this.numeroPlatillo = numeroPlatillo;
+        this.cantidad = cantidad;
+        this.precio = cantidad * precioUnitario;
+    }
+}
+public class SistemaRestaurante {
+    static Scanner scanner = new Scanner(System.in);
+    static ArrayList<Orden> ordenes = new ArrayList<>();
+    static int nextId = 200;
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("1- Abrir orden\n2- Agregar platillo a la orden\n3- Cerrar orden\n4- Salir");
+            switch (scanner.nextInt()) {
+                case 1 -> abrirOrden();
+                case 2 -> agregarPlatillo();
+                case 3 -> cerrarOrden();
+                case 4 -> System.exit(0);
+            }
+        }
+    }
+
+    static void abrirOrden() {
+        ordenes.add(new Orden(nextId++));
+        System.out.println("Orden abierta correctamente.");
+    }
+
+    static void agregarPlatillo() {
+        Orden orden = seleccionarOrden("abierta");
+        if (orden == null) return;
+
+        System.out.print("Número de platillo: ");
+        int numeroPlatillo = scanner.nextInt();
+        System.out.print("Cantidad: ");
+        int cantidad = scanner.nextInt();
+        double precioUnitario = 100; // Precio de ejemplo
+
+        orden.agregarPlatillo(numeroPlatillo, cantidad, precioUnitario);
+        System.out.println("Platillo agregado con éxito.");
+    }
+
+    static void cerrarOrden() {
+        Orden orden = seleccionarOrden("abierta");
+        if (orden == null || orden.platillos.isEmpty()) return;
+
+        System.out.print("Propina: ");
+        double propina = scanner.nextDouble();
+        orden.cerrarOrden(propina);
+        System.out.println("Orden cerrada con éxito.");
+    }
+
+    static Orden seleccionarOrden(String estado) {
+        ordenes.stream().filter(o -> o.estado.equals(estado))
+            .forEach(o -> System.out.println("Orden ID: " + o.id));
+        System.out.print("Seleccione ID de la orden: ");
+        int id = scanner.nextInt();
+        return ordenes.stream().filter(o -> o.id == id && o.estado.equals(estado)).findFirst().orElse(null);
+    }
+}
