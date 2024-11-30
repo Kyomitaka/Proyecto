@@ -1,0 +1,57 @@
+import javax.swing.JOptionPane;
+
+public class Reportes {
+    
+    private static void platillosMasVendidos() { //aun esta en proceso
+        
+    }
+    private static void mejorMeseroEnVentas() { //Mejor mesero
+    Mesero mejorMesero = null;
+    double maxVentas = 0;
+    for (Mesero mesero : meseros) {
+        double totalVentas = mesero.calcularVentasTotales();
+        if (totalVentas > maxVentas) {
+            maxVentas = totalVentas;
+            mejorMesero = mesero;
+        }
+    }
+
+    if (mejorMesero != null) {
+        JOptionPane.showMessageDialog(null, "Mejor mesero en ventas:\n" + mejorMesero);
+    }
+}
+   
+    private static void mejorMeseroEnRating() { //mejor mesero en Rating
+    Mesero mejorMesero = null;
+    double maxRating = 0;
+    for (Mesero mesero : meseros) {
+        if (mesero.rating > maxRating) {
+            maxRating = mesero.rating;
+            mejorMesero = mesero;
+        }
+    }
+
+    if (mejorMesero != null) {
+        JOptionPane.showMessageDialog(null, "Mejor mesero en rating:\n" + mejorMesero);
+    }
+}
+    
+    private static void ventasTotales() { //Ventas Totales
+    double totalVentasNetas = 0, totalPropinas = 0, totalIVA = 0;
+
+    for (Orden orden : ordenes) {
+        if (orden != null && !orden.abierta) {
+            totalVentasNetas += orden.total - orden.iva;
+            totalIVA += orden.iva;
+            totalPropinas += orden.mesero.propinas;
+        }
+    }
+
+    JOptionPane.showMessageDialog(null, """
+                                        Ventas Totales:
+                                        Ventas Netas: $""" + totalVentasNetas + "\n" +
+            "IVA: $" + totalIVA + "\n" +
+            "Propinas: $" + totalPropinas);
+}
+    
+}
