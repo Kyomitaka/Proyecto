@@ -2,7 +2,40 @@ import javax.swing.JOptionPane;
 
 public class Reportes {
     
-    private static void platillosMasVendidos() { //aun esta en proceso
+    private static void platillosMasVendidos() { 
+
+     String[] nombresPlatillos = new String[100];
+        int[] cantidades = new int[100];
+        int contador = 0;
+
+        for (Orden orden : ordenes) {
+            if (orden != null && !orden.isAbierta()) {
+                for (DetalleOrden detalle : orden.getDetalles()) {
+                    String nombre = detalle.getPlatillo().getNombre();
+                    int cantidad = detalle.getCantidad();
+
+                    boolean encontrado = false;
+                    for (int i = 0; i < contador; i++) {
+                        if (nombresPlatillos[i].equals(nombre)) {
+                            cantidades[i] += cantidad;
+                            encontrado = true;
+                            break;
+                        }
+                    }
+
+                    if (!encontrado) {
+                        nombresPlatillos[contador] = nombre;
+                        cantidades[contador] = cantidad;
+                        contador++;
+                    }
+                }
+            }
+        }
+
+        System.out.println("Platillos más vendidos:");
+        for (int i = 0; i < contador; i++) {
+            System.out.println(nombresPlatillos[i] + ": " + cantidades[i] + " unidades vendidas");
+        }  
         
     }
     private static void mejorMeseroEnVentas() { //Mejor mesero
